@@ -2,8 +2,8 @@ package in.fampay.videofeedinterface.dao;
 
 import java.util.Optional;
 
-import in.fampay.videoscraper.entity.StoredVideoDetailsEntity;
-import in.fampay.videoscraper.repository.StoredVideoDetailsRepository;
+import in.fampay.videofeedinterface.entity.StoredVideoDetailsEntity;
+import in.fampay.videofeedinterface.repository.StoredVideoDetailsRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
+import reactor.core.publisher.Mono;
 
 @Component
 @Slf4j
@@ -24,14 +25,14 @@ public class StoredVideoDetailsDao {
     return storedVideoDetailsRepository.findByReferenceId(referenceId);
   }
 
-  public final Page<StoredVideoDetailsEntity> getPaginatedVideoDetailsAfterReference(final long lastPageReference,
+  public final Mono<Page<StoredVideoDetailsEntity>> getPaginatedVideoDetailsAfterReference(final long lastPageReference,
       final int size) {
 
     val pagination = PageRequest.of(0, size, Sort.by("video_uploaded_at").descending());
     return storedVideoDetailsRepository.findByIdGreaterThan(lastPageReference, pagination);
   }
 
-  public final Page<StoredVideoDetailsEntity> getInitialVideoDetailsPage(final int size) {
+  public final Mono<Page<StoredVideoDetailsEntity>> getInitialVideoDetailsPage(final int size) {
 
     val pagination = PageRequest.of(0, size, Sort.by("video_uploaded_at").descending());
     return storedVideoDetailsRepository.findAll(pagination);

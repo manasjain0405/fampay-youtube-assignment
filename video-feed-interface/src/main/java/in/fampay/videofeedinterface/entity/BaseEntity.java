@@ -2,35 +2,37 @@ package in.fampay.videofeedinterface.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.Version;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.annotation.Version;
+import org.springframework.data.relational.core.mapping.Column;
 
 @Data
-@MappedSuperclass
+@AllArgsConstructor
+@NoArgsConstructor
+@SuperBuilder
 public class BaseEntity implements Serializable {
 
-  @Column(name = "id")
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Id
+  @Column("id")
   private Long id;
 
-  @Column(name = "created_at")
-  @CreationTimestamp
-  private LocalDateTime createdAt;
+  @CreatedDate
+  @Column("created_at")
+  private LocalDateTime createdAt = LocalDateTime.now();
 
-  @Column(name = "updated_at")
-  @UpdateTimestamp
+  @LastModifiedDate
+  @Column("updated_at")
   private LocalDateTime updatedAt;
 
   @Version
-  @Column(name = "version")
+  @Column("version")
   private Long version;
+
 }

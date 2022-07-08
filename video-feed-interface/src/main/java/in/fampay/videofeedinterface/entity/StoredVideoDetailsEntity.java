@@ -1,43 +1,34 @@
 package in.fampay.videofeedinterface.entity;
 
 import java.time.LocalDate;
-import javax.persistence.Column;
-import javax.persistence.Convert;
-import javax.persistence.Entity;
-import javax.persistence.Lob;
-import javax.persistence.Table;
 
-import in.fampay.videoscraper.entity.context.VideoMetadataContext;
-import in.fampay.videoscraper.entity.converter.VideoMetadataConverter;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import in.fampay.videofeedinterface.entity.context.VideoMetadataContext;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.ToString;
+import lombok.experimental.SuperBuilder;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
 
 @EqualsAndHashCode(callSuper = true)
-@Entity
-@Table(name = "stored_video_details_entity")
+@ToString(callSuper = true)
+@SuperBuilder
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Table("stored_video_details_entity")
 public class StoredVideoDetailsEntity extends BaseEntity {
 
-  @Column(name = "ref_id")
+  @Column("ref_id")
   private String referenceId;
 
-  @Column(name = "video_title")
+  @Column("video_title")
   private String videoTitle;
 
-  @Column(name = "video_description")
+  @Column("video_description")
   private String videoDescription;
 
-  @Column(name = "video_uploaded_at")
+  @Column("video_uploaded_at")
   private LocalDate videoUploadedAt;
 
-  @Column(name = "context", columnDefinition = "blob")
-  @Lob
-  @Convert(converter = VideoMetadataConverter.class)
+  @Column("context")
   private VideoMetadataContext context;
 }
