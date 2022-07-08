@@ -1,0 +1,46 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/example_db?useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: root
+    password: login@root
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      idle-timeout: 60000
+      connection-timeout: 2000
+      maximum-pool-size: 35
+      minimum-idle: 10
+      max-lifetime: 1800000
+  cloud:
+    function:
+      definition: addVideoEntry
+    stream:
+      bindings:
+        add-video-entry-in-0:
+          destination: onboarding_request_init_progress
+          binder: kafka
+          contentType: application/json
+          group: onboardingreq-deduplicate
+        init-video-refresh:
+          destination: onboarding_data_update
+          binder: kafka
+          contentType: application/json
+      kafka:
+        default:
+          producer:
+            configuration:
+              key:
+                serializer: org.apache.kafka.common.serialization.StringSerializer
+        binder:
+          autoCreateTopics: true
+          minPartitionCount: 4
+          replicationFactor: 1
+          brokers: PLAINTEXT://127.0.0.1:9092
+          configuration:
+            commit.interval.ms: 1000
+            session.timeout.ms: 20000
+            default:
+              key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+              value.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
