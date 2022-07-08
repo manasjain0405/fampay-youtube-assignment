@@ -1,5 +1,6 @@
 package in.fampay.videoscraper.entity;
 
+import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
@@ -31,6 +32,9 @@ public class StoredVideoDetailsEntity extends BaseEntity {
 
   @Column(name = "video_description")
   private String videoDescription;
+
+  @Column(name = "video_uploaded_at")
+  private LocalDate videoUploadedAt;
 
   @Column(name = "context", columnDefinition = "blob")
   @Lob
