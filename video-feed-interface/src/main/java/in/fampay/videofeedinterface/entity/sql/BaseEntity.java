@@ -1,8 +1,9 @@
-package in.fampay.videofeedinterface.entity;
+package in.fampay.videofeedinterface.entity.sql;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import in.fampay.videofeedinterface.entity.sql.constants.BaseEntityColumns;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,19 +21,19 @@ import org.springframework.data.relational.core.mapping.Column;
 public class BaseEntity implements Serializable {
 
   @Id
-  @Column("id")
+  @Column(BaseEntityColumns.ID)
   private Long id;
 
   @CreatedDate
-  @Column("created_at")
+  @Column(BaseEntityColumns.CREATED_AT)
   private LocalDateTime createdAt = LocalDateTime.now();
 
   @LastModifiedDate
-  @Column("updated_at")
-  private LocalDateTime updatedAt;
+  @Column(BaseEntityColumns.UPDATED_AT)
+  private LocalDateTime updatedAt = LocalDateTime.now();
 
   @Version
-  @Column("version")
+  @Column(BaseEntityColumns.VERSION)
   private Long version;
 
 }

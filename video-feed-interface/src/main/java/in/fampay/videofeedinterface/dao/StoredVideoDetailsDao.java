@@ -2,8 +2,8 @@ package in.fampay.videofeedinterface.dao;
 
 import java.util.Optional;
 
-import in.fampay.videofeedinterface.entity.StoredVideoDetailsEntity;
-import in.fampay.videofeedinterface.repository.StoredVideoDetailsRepository;
+import in.fampay.videofeedinterface.entity.sql.StoredVideoDetailsEntity;
+import in.fampay.videofeedinterface.repository.sql.StoredVideoDetailsRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
@@ -28,13 +28,13 @@ public class StoredVideoDetailsDao {
   public final Mono<Page<StoredVideoDetailsEntity>> getPaginatedVideoDetailsAfterReference(final long lastPageReference,
       final int size) {
 
-    val pagination = PageRequest.of(0, size, Sort.by("video_uploaded_at").descending());
+    val pagination = PageRequest.of(0, size, Sort.by("videoUploadedAt").descending());
     return storedVideoDetailsRepository.findByIdGreaterThan(lastPageReference, pagination);
   }
 
   public final Mono<Page<StoredVideoDetailsEntity>> getInitialVideoDetailsPage(final int size) {
 
-    val pagination = PageRequest.of(0, size, Sort.by("video_uploaded_at").descending());
+    val pagination = PageRequest.of(0, size, Sort.by("videoUploadedAt").descending());
     return storedVideoDetailsRepository.findAll(pagination);
   }
 }

@@ -1,8 +1,8 @@
-package in.fampay.videofeedinterface.repository;
+package in.fampay.videofeedinterface.repository.sql;
 
 import java.util.Optional;
 
-import in.fampay.videofeedinterface.entity.StoredVideoDetailsEntity;
+import in.fampay.videofeedinterface.entity.sql.StoredVideoDetailsEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
