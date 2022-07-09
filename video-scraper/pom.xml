@@ -24,6 +24,10 @@
       <artifactId>spring-boot-starter-data-jpa</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-stream</artifactId>
     </dependency>
@@ -34,10 +38,6 @@
     <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-openfeign</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-webflux</artifactId>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -56,8 +56,8 @@
       <version>1.5.1.Final</version>
     </dependency>
     <dependency>
-      <artifactId>springdoc-openapi-webflux-ui</artifactId>
       <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-ui</artifactId>
       <version>1.6.9</version>
     </dependency>
     <dependency>

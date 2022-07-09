@@ -1,5 +1,6 @@
 package in.fampay.videoscraper.dto.youtubeapi;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,9 +10,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-class ThumbnailDetails {
+public class YoutubeSearchPageInfo {
 
-  public String url;
-  public int width;
-  public int height;
+  @JsonProperty("totalResults")
+  public int totalResults;
+
+  @JsonProperty("resultsPerPage")
+  public int resultsPerPage;
 }

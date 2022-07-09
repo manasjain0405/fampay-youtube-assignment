@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8010
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -13,6 +13,10 @@ spring:
       maximum-pool-size: 35
       minimum-idle: 10
       max-lifetime: 1800000
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
   cloud:
     function:
       definition: addVideoEntry
@@ -45,7 +49,22 @@ spring:
               key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
               value.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
 
+feign:
+  httpclient:
+    max-connections: 500
+    max-connections-per-route: 40
+    hc5:
+      enabled: false
+      pool-concurrency-policy: lax
+      pool-reuse-policy: fifo
+  circuitbreaker:
+    enabled: false
+  client.config.default:
+    connectTimeout: 5000
+    readTimeout: 8000
+
 youtube:
+  query: football
   api:
     base-url: https://youtube.googleapis.com/youtube/v3
     key: ${YOUTUBE_KEY}

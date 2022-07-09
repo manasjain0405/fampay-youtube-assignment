@@ -10,14 +10,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-class Thumbnails {
+public class YoutubeThumbnailDetails {
 
-  @JsonProperty("default")
-  public ThumbnailDetails mydefault;
+  @JsonProperty("url")
+  public String url;
 
-  @JsonProperty("medium")
-  public ThumbnailDetails medium;
+  @JsonProperty("width")
+  public int width;
 
-  @JsonProperty("high")
-  public ThumbnailDetails high;
+  @JsonProperty("height")
+  public int height;
 }

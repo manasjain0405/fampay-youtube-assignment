@@ -1,7 +1,5 @@
 package in.fampay.videoscraper.dto.youtubeapi;
 
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class YoutubeSearchResponseDto {
+public class YoutubeSearchItem {
 
   @JsonProperty("kind")
   public String kind;
@@ -20,19 +18,9 @@ public class YoutubeSearchResponseDto {
   @JsonProperty("etag")
   public String etag;
 
-  @JsonProperty("nextPageToken")
-  public String nextPageToken;
+  @JsonProperty("id")
+  public YoutubeVideoId youtubeVideoId;
 
-  @JsonProperty("regionCode")
-  public String regionCode;
-
-  @JsonProperty("pageInfo")
-  public YoutubeSearchPageInfo youtubeSearchPageInfo;
-
-  @JsonProperty("items")
-  public List<YoutubeSearchItem> youtubeSearchItems;
-
+  @JsonProperty("snippet")
+  public YoutubeVideoDetails youtubeVideoDetails;
 }
-
-
-

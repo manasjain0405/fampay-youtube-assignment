@@ -1,6 +1,7 @@
 package in.fampay.videoscraper.client;
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 import in.fampay.videoscraper.dto.youtubeapi.YoutubeSearchResponseDto;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -20,6 +21,6 @@ public interface YoutubeApiClient {
       @RequestParam(name = "maxResults") final Long maxResults,
       @RequestParam(name = "order", defaultValue = "date") final String orderBy,
       @RequestParam(name = "type", defaultValue = "video") final String type,
-      @RequestParam(name = "publishedAfter") @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
-      final LocalDateTime publishedAfter);
+      @RequestParam(name = "publishedAfter") @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
+      final ZonedDateTime publishedAfter);
 }

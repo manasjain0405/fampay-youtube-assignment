@@ -1,5 +1,6 @@
 package in.fampay.videoscraper.dto.youtubeapi;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,10 +10,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-class Item {
+public class YoutubeVideoId {
 
+  @JsonProperty("kind")
   public String kind;
-  public String etag;
-  public Id id;
-  public Snippet snippet;
+
+  @JsonProperty("videoId")
+  public String videoId;
 }

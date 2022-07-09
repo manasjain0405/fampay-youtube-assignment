@@ -1,9 +1,11 @@
 package in.fampay.videoscraper.entity;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.Lob;
 import javax.persistence.Table;
 
@@ -17,7 +19,8 @@ import lombok.NoArgsConstructor;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name = "stored_video_details_entity")
+@Table(name = "stored_video_details_entity",
+       indexes = @Index(name = "uploadedAtIndex", columnList = "video_uploaded_at"))
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -34,7 +37,7 @@ public class StoredVideoDetailsEntity extends BaseEntity {
   private String videoDescription;
 
   @Column(name = "video_uploaded_at")
-  private LocalDate videoUploadedAt;
+  private LocalDateTime videoUploadedAt;
 
   @Column(name = "context", columnDefinition = "blob")
   @Lob
