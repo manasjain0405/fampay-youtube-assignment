@@ -13,7 +13,4 @@ public interface StoredVideoDetailsRepository extends JpaRepository<StoredVideoD
 
   Optional<StoredVideoDetailsEntity> findByReferenceId(final String referenceId);
 
-  Page<StoredVideoDetailsEntity> findByIdGreaterThan(final long cursorId, final Pageable pageable);
-
-  Page<StoredVideoDetailsEntity> findAll(final Pageable pageable);
 }

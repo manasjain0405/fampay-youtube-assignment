@@ -15,8 +15,8 @@
   <description>Video Scraper for fetching youtube videos periodically</description>
   <properties>
     <java.version>11</java.version>
-    <spring-cloud.version>2020.0.4</spring-cloud.version>
-    <jackson.version>2.13.2</jackson.version>
+    <spring-cloud.version>2021.0.1</spring-cloud.version>
+    <jackson.version>2.13.3</jackson.version>
   </properties>
   <dependencies>
     <dependency>
@@ -28,9 +28,16 @@
       <artifactId>spring-cloud-stream</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-stream-binder-kafka</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-openfeign</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-webflux</artifactId>
-      <version>2.0.3.RELEASE</version>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -46,12 +53,12 @@
     <dependency>
       <artifactId>mapstruct</artifactId>
       <groupId>org.mapstruct</groupId>
-      <version>1.4.2.Final</version>
+      <version>1.5.1.Final</version>
     </dependency>
     <dependency>
       <artifactId>springdoc-openapi-webflux-ui</artifactId>
       <groupId>org.springdoc</groupId>
-      <version>1.6.2</version>
+      <version>1.6.9</version>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.datatype</groupId>
@@ -61,7 +68,7 @@
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
-      <version>8.0.17</version>
+      <version>8.0.29</version>
     </dependency>
   </dependencies>
   <dependencyManagement>
@@ -90,7 +97,7 @@
             <path>
               <artifactId>mapstruct-processor</artifactId>
               <groupId>org.mapstruct</groupId>
-              <version>1.4.2.Final</version>
+              <version>1.5.1.Final</version>
             </path>
             <path>
               <artifactId>lombok</artifactId>

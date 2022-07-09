@@ -19,12 +19,12 @@ spring:
     stream:
       bindings:
         add-video-entry-in-0:
-          destination: onboarding_request_init_progress
+          destination: add-video-search-entry
           binder: kafka
           contentType: application/json
-          group: onboardingreq-deduplicate
+          group: youtube-scraper
         init-video-refresh:
-          destination: onboarding_data_update
+          destination: add-video-search-entry
           binder: kafka
           contentType: application/json
       kafka:
@@ -44,3 +44,15 @@ spring:
             default:
               key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
               value.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+
+youtube:
+  api:
+    base-url: https://youtube.googleapis.com/youtube/v3
+    key: ${YOUTUBE_KEY}
+
+springdoc:
+  packages-to-scan: in.fampay.videoscraper.controller
+  api-docs:
+    path: "/v3/api-docs"
+  swagger-ui:
+    disable-swagger-default-url: true
