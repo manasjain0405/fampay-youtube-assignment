@@ -1,4 +1,4 @@
-package in.fampay.videofeedinterface.entity.es;
+package in.fampay.videoscraper.entity.es;
 
 import java.time.LocalDateTime;
 

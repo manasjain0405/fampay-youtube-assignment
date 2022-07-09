@@ -1,4 +1,4 @@
-package in.fampay.videoscraper.entity;
+package in.fampay.videoscraper.entity.sql;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

@@ -6,8 +6,9 @@ import in.fampay.videoscraper.dto.youtubeapi.YoutubeSearchItem;
 import in.fampay.videoscraper.dto.youtubeapi.YoutubeThumbnailDetails;
 import in.fampay.videoscraper.dto.youtubeapi.YoutubeThumbnails;
 import in.fampay.videoscraper.dto.youtubeapi.YoutubeVideoDetails;
-import in.fampay.videoscraper.entity.StoredVideoDetailsEntity;
-import in.fampay.videoscraper.entity.context.VideoMetadataContext;
+import in.fampay.videoscraper.entity.es.StoredVideoSearchEntity;
+import in.fampay.videoscraper.entity.sql.StoredVideoDetailsEntity;
+import in.fampay.videoscraper.entity.sql.context.VideoMetadataContext;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.mapstruct.AfterMapping;
@@ -48,4 +49,13 @@ public abstract class YoutubeSearchMapper {
         .ifPresent(videoMetadataContextBuilder::publisherAccountName);
     entityBuilder.context(videoMetadataContextBuilder.build());
   }
+
+  @Mappings({
+      @Mapping(target = "referenceId", source = "referenceId"),
+      @Mapping(target = "videoTitle", source = "videoTitle"),
+      @Mapping(target = "videoDescription", source = "videoDescription"),
+      @Mapping(target = "videoUploadedAt", source = "videoUploadedAt"),
+  })
+  public abstract StoredVideoSearchEntity convertVideoDetailsToVideoSearchEntity(
+      final StoredVideoDetailsEntity videoDetailsEntity);
 }

@@ -1,11 +1,11 @@
-package in.fampay.videoscraper.entity.converter;
+package in.fampay.videoscraper.entity.sql.converter;
 
 import java.util.Optional;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import in.fampay.videoscraper.entity.context.VideoMetadataContext;
+import in.fampay.videoscraper.entity.sql.context.VideoMetadataContext;
 import in.fampay.videoscraper.utils.ThrowingFunction;
 import in.fampay.videoscraper.utils.ThrowingSupplier;
 import lombok.RequiredArgsConstructor;

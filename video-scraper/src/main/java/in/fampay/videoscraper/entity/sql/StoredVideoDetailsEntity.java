@@ -1,6 +1,5 @@
-package in.fampay.videoscraper.entity;
+package in.fampay.videoscraper.entity.sql;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Convert;
@@ -9,8 +8,8 @@ import javax.persistence.Index;
 import javax.persistence.Lob;
 import javax.persistence.Table;
 
-import in.fampay.videoscraper.entity.context.VideoMetadataContext;
-import in.fampay.videoscraper.entity.converter.VideoMetadataConverter;
+import in.fampay.videoscraper.entity.sql.context.VideoMetadataContext;
+import in.fampay.videoscraper.entity.sql.converter.VideoMetadataConverter;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

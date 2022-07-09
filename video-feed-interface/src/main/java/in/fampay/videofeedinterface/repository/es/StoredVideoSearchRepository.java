@@ -8,7 +8,7 @@ import reactor.core.publisher.Flux;
 
 public interface StoredVideoSearchRepository extends ReactiveSortingRepository<StoredVideoSearchEntity, String> {
 
-  @Query("{\"multi_match\": {\"query\": \"?0\", \"fields\": [\"title\", \"description\"], \"fuzziness\": \"AUTO\"}}")
+  @Query("{\"multi_match\": {\"query\": \"?0\", \"fields\": [\"videoTitle\", \"videoDescription\"], \"fuzziness\": \"AUTO\"}}")
   Flux<StoredVideoSearchEntity> fuzzySearchTitleAndDescription(final String q, final Pageable pageable);
 
 }
