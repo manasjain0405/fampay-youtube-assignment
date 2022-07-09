@@ -22,7 +22,7 @@ spring:
       definition: addVideoEntry
     stream:
       bindings:
-        add-video-entry-in-0:
+        addVideoEntry-in-0:
           destination: add-video-search-entry
           binder: kafka
           contentType: application/json

@@ -55,8 +55,8 @@ public class YoutubeInputStreamScheduler {
         YoutubeApiConstants.MAX_RESULT_PARAMETER, YoutubeApiConstants.ORDER_PARAMETER,
         YoutubeApiConstants.TYPE_PARAMETER, ZonedDateTime.now(ZoneId.of("Asia/Kolkata")).minusDays(60));
     log.info("Youtube Api Result {}", result);
-    if (YoutubeApiConstants.API_SUCCESS_CODE == result.getStatusCodeValue()) {
-
+    if (YoutubeApiConstants.API_SUCCESS_CODE.contains(result.getStatusCodeValue())) {
+      log.info("Api success, data writeback init");
       Optional.ofNullable(result.getBody())
           .map(YoutubeSearchResponseDto::getYoutubeSearchItems)
           .ifPresent(youtubeSearchItems ->
