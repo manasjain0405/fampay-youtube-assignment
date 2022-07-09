@@ -46,5 +46,6 @@ public abstract class YoutubeSearchMapper {
         .map(YoutubeSearchItem::getYoutubeVideoDetails)
         .map(YoutubeVideoDetails::getChannelTitle)
         .ifPresent(videoMetadataContextBuilder::publisherAccountName);
+    entityBuilder.context(videoMetadataContextBuilder.build());
   }
 }
