@@ -1,32 +1,25 @@
 package in.fampay.videofeedinterface.config;
 
-import org.elasticsearch.client.RestHighLevelClient;
+import lombok.val;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.elasticsearch.client.ClientConfiguration;
-import org.springframework.data.elasticsearch.client.RestClients;
-import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
-import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
-import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
+import org.springframework.data.elasticsearch.client.reactive.ReactiveElasticsearchClient;
+import org.springframework.data.elasticsearch.client.reactive.ReactiveRestClients;
+import org.springframework.data.elasticsearch.config.AbstractReactiveElasticsearchConfiguration;
 
 @Configuration
-@EnableElasticsearchRepositories(basePackages = "in.fampay.videofeedinterface.repository")
-public class ElasticSearchClientConfig {
+public class ElasticSearchClientConfig extends AbstractReactiveElasticsearchConfiguration {
 
+  @Override
   @Bean
-  public RestHighLevelClient client() {
-    ClientConfiguration clientConfiguration
-        = ClientConfiguration
+  public ReactiveElasticsearchClient reactiveElasticsearchClient() {
+
+    val clientConfiguration = ClientConfiguration
         .builder()
         .connectedTo("localhost:9200")
         .build();
-
-    return RestClients.create(clientConfiguration).rest();
-  }
-
-  @Bean
-  public ElasticsearchOperations elasticsearchTemplate() {
-    return new ElasticsearchRestTemplate(client());
+    return ReactiveRestClients.create(clientConfiguration);
   }
 
 }

@@ -1,1 +1,24 @@
+server:
+  port: 8010
 
+spring:
+  r2dbc:
+    url: r2dbc:mysql://localhost:3306/example_db
+    username: root
+    password: login@root
+    initialization-mode: always
+    pool:
+      initial-size: 10
+      max-size: 100
+      max-idle-time: 10s
+      validation-query: SELECT 1
+      max-create-connection-time: 3s
+      max-acquire-time: 5s
+      max-life-time: 180s
+
+springdoc:
+  packages-to-scan: in.fampay.videofeedinterface.controller
+  api-docs:
+    path: "/v3/api-docs"
+  swagger-ui:
+    disable-swagger-default-url: true

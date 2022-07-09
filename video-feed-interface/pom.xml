@@ -24,6 +24,19 @@
 			<artifactId>spring-boot-starter-data-r2dbc</artifactId>
 		</dependency>
 		<dependency>
+			<artifactId>r2dbc-mysql</artifactId>
+			<groupId>dev.miku</groupId>
+		</dependency>
+		<dependency>
+			<artifactId>mysql-connector-java</artifactId>
+			<groupId>mysql</groupId>
+		</dependency>
+		<!-- Apache Commons Pool -->
+		<dependency>
+			<artifactId>commons-pool2</artifactId>
+			<groupId>org.apache.commons</groupId>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webflux</artifactId>
 		</dependency>
@@ -35,7 +48,6 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-stream</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -49,7 +61,7 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>1.7.5</version>
+			<version>1.7.36</version>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -60,12 +72,12 @@
 		<dependency>
 			<artifactId>mapstruct</artifactId>
 			<groupId>org.mapstruct</groupId>
-			<version>1.4.2.Final</version>
+			<version>1.5.1.Final</version>
 		</dependency>
 		<dependency>
 			<artifactId>springdoc-openapi-webflux-ui</artifactId>
 			<groupId>org.springdoc</groupId>
-			<version>1.6.2</version>
+			<version>1.6.9</version>
 		</dependency>
 	</dependencies>
 	<dependencyManagement>
@@ -94,7 +106,7 @@
 						<path>
 							<artifactId>mapstruct-processor</artifactId>
 							<groupId>org.mapstruct</groupId>
-							<version>1.4.2.Final</version>
+							<version>1.5.1.Final</version>
 						</path>
 						<path>
 							<artifactId>lombok</artifactId>

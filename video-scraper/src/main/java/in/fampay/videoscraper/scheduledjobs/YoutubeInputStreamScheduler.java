@@ -23,7 +23,7 @@ public class YoutubeInputStreamScheduler {
     this.query = query;
   }
 
-  @Scheduled(fixedRate = 60000)
+  @Scheduled(fixedRate = 10000)
   public void reportCurrentTime() {
 
     youtubeVideoFetchService.fetchVideoOnQueryParam(query, YoutubeApiConstants.MAX_RESULT_PARAMETER);

@@ -1,5 +1,6 @@
 package in.fampay.videofeedinterface.entity.es;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
@@ -23,7 +24,7 @@ public class StoredVideoSearchEntity {
   private String referenceId;
 
   @Field(type = FieldType.Date, name = "videoUploadedAt")
-  private LocalDateTime videoUploadedAt;
+  private LocalDate videoUploadedAt;
 
   @Field(type = FieldType.Text, name = "videoTitle")
   private String videoTitle;
