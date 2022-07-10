@@ -67,7 +67,7 @@ feign:
     readTimeout: 8000
 
 youtube:
-  query: football
+  query: ${YOUTUBE_SEARCH_QUERY}
   api:
     base-url: https://youtube.googleapis.com/youtube/v3
     key: ${YOUTUBE_KEY}

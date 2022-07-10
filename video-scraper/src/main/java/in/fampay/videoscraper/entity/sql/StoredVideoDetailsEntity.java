@@ -19,7 +19,10 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "stored_video_details_entity",
-       indexes = @Index(name = "uploadedAtIndex", columnList = "video_uploaded_at"))
+       indexes = {
+           @Index(name = "referenceIdUniqueIndex", columnList = "ref_id", unique = true),
+           @Index(name = "uploadedAtIndex", columnList = "video_uploaded_at"),
+       })
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
