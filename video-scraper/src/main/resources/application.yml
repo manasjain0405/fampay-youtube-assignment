@@ -3,12 +3,12 @@ server:
 
 spring:
   elasticsearch:
-    url: localhost:9200
+    url: vs-elasticsearch:9200
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/video_details?useUnicode=true&characterEncoding=utf8&useSSL=false
-    username: root
-    password: login@root
+    url: jdbc:mysql://vs-mysql:3306/video_details?useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false
+    username: ${DB_USERNAME}
+    password: ${DB_PASS}
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
       idle-timeout: 60000
@@ -44,7 +44,7 @@ spring:
           autoCreateTopics: true
           minPartitionCount: 4
           replicationFactor: 1
-          brokers: PLAINTEXT://127.0.0.1:9092
+          brokers: PLAINTEXT://vs-kafka:9092
           configuration:
             commit.interval.ms: 1000
             session.timeout.ms: 20000
