@@ -2,6 +2,8 @@ server:
   port: 8010
 
 spring:
+  elasticsearch:
+    url: localhost:9200
   r2dbc:
     url: r2dbc:mysql://localhost:3306/example_db
     username: root
