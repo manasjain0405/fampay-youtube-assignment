@@ -3,9 +3,9 @@ server:
 
 spring:
   elasticsearch:
-    url: localhost:9200
+    url: vs-elasticsearch:9200
   r2dbc:
-    url: r2dbc:mysql://localhost:3306/example_db
+    url: r2dbc:mysql://vs-mysql:3306/video_details
     username: root
     password: login@root
     initialization-mode: always

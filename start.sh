@@ -1,3 +1,6 @@
 #!/bin/sh
-
-java $JAVA_OPTS -jar onboarding-data-server.jar $GROW_OPTS -Xms$JAVA_PROCESS_MIN_HEAP -Xmx$JAVA_PROCESS_MAX_HEAP --spring.profiles.active=$SPRING_ACTIVE_PROFILE
+mvn clean install -f ./video-scraper/pom.xml > video-scraper-build.log
+mvn clean install -f ./video-feed-interface/pom.xml > video-feed-build.log
+docker build . -t video-scraper-application:1.0 -f video-scraper/Dockerfile
+docker build . -t video-feed-application:1.0 -f video-feed-interface/Dockerfile
+docker compose up -d
