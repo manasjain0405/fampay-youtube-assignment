@@ -1,8 +1,5 @@
 package in.fampay.videofeedinterface.entity.es;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,15 +13,12 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Document(indexName = "title_desc_search")
+@Document(indexName = "video_title_desc_search")
 public class StoredVideoSearchEntity {
 
   @Id
   @Field(type = FieldType.Keyword, name = "refId")
   private String referenceId;
-
-  @Field(type = FieldType.Date, name = "videoUploadedAt")
-  private LocalDate videoUploadedAt;
 
   @Field(type = FieldType.Text, name = "videoTitle")
   private String videoTitle;

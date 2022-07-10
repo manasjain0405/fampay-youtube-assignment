@@ -23,7 +23,7 @@ public class RepositoryTestController {
   }
 
   @GetMapping("/testSearchQuery")
-  public Flux<StoredVideoSearchEntity> getPaginatedSearchQuery(@RequestParam("searchParam") final String query) {
+  public Flux<StoredVideoDetailsEntity> getPaginatedSearchQuery(@RequestParam("searchParam") final String query) {
     return storedVideosDao.getPaginatedSearchResult(query, 10);
   }
 }

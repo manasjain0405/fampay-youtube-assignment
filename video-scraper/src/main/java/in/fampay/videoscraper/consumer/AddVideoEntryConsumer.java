@@ -26,7 +26,6 @@ public class AddVideoEntryConsumer {
 
     return ThrowingConsumer.unchecked((message) -> {
 
-      log.info("Received entity to write: {}", message);
       val entity = objectMapper.readValue(message.getPayload(), StoredVideoDetailsEntity.class);
       if (storedVideoDetailsDao.getByReferenceId(entity.getReferenceId()).isEmpty()) {
         storedVideoDetailsDao.save(entity);

@@ -51,9 +51,7 @@ public class YoutubeVideoFetchServiceImpl implements VideoFetchService {
         YoutubeApiConstants.PART_PARAMETER, recordFetchCount,
         YoutubeApiConstants.ORDER_PARAMETER, YoutubeApiConstants.TYPE_PARAMETER,
         ZonedDateTime.now(ZoneId.of("Asia/Kolkata")).minusDays(60));
-    log.info("Youtube Api Result {}", result);
     if (YoutubeApiConstants.API_SUCCESS_CODE.contains(result.getStatusCodeValue())) {
-      log.info("Api success, data write-back init");
       Optional.ofNullable(result.getBody())
           .map(YoutubeSearchResponseDto::getYoutubeSearchItems)
           .ifPresent(youtubeSearchItems ->

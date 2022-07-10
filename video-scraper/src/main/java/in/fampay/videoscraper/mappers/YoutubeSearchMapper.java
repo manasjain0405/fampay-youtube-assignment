@@ -22,6 +22,8 @@ import org.mapstruct.NullValueCheckStrategy;
 @Slf4j
 public abstract class YoutubeSearchMapper {
 
+  public static final String ES_DATETIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
+
   @Mappings({
       @Mapping(target = "referenceId", source = "youtubeVideoId.videoId"),
       @Mapping(target = "videoTitle", source = "youtubeVideoDetails.title"),
@@ -54,8 +56,8 @@ public abstract class YoutubeSearchMapper {
       @Mapping(target = "referenceId", source = "referenceId"),
       @Mapping(target = "videoTitle", source = "videoTitle"),
       @Mapping(target = "videoDescription", source = "videoDescription"),
-      @Mapping(target = "videoUploadedAt", source = "videoUploadedAt"),
   })
   public abstract StoredVideoSearchEntity convertVideoDetailsToVideoSearchEntity(
       final StoredVideoDetailsEntity videoDetailsEntity);
+
 }

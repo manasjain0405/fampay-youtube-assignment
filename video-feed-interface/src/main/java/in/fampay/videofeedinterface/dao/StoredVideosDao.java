@@ -1,6 +1,7 @@
 package in.fampay.videofeedinterface.dao;
 
-import in.fampay.videofeedinterface.entity.es.StoredVideoSearchEntity;
+import java.time.LocalDateTime;
+
 import in.fampay.videofeedinterface.entity.sql.StoredVideoDetailsEntity;
 import in.fampay.videofeedinterface.repository.es.StoredVideoSearchRepository;
 import in.fampay.videofeedinterface.repository.sql.StoredVideoDetailsRepository;
@@ -26,11 +27,11 @@ public class StoredVideosDao {
     return storedVideoDetailsRepository.findByReferenceId(referenceId);
   }
 
-  public final Flux<StoredVideoDetailsEntity> getPaginatedVideoDetailsAfterReference(final long lastPageReference,
+  public final Flux<StoredVideoDetailsEntity> getPaginatedVideoDetailsWithCursor(final LocalDateTime cursor,
       final int size) {
 
     val pagination = PageRequest.of(0, size, Sort.by("videoUploadedAt").descending());
-    return storedVideoDetailsRepository.findByIdGreaterThan(lastPageReference, pagination);
+    return storedVideoDetailsRepository.findByUpdatedAtLessThan(cursor, pagination);
   }
 
   public final Flux<StoredVideoDetailsEntity> getInitialVideoDetailsPage(final int size) {
@@ -39,10 +40,10 @@ public class StoredVideosDao {
     return storedVideoDetailsRepository.findAllBy(pagination);
   }
 
-  public final Flux<StoredVideoSearchEntity> getPaginatedSearchResult(final String query, final int size) {
+  public final Flux<StoredVideoDetailsEntity> getPaginatedSearchResult(final String query, final int size) {
 
-    val pagination = PageRequest.of(0, size, Sort.by("videoUploadedAt").descending());
-    return storedVideoSearchRepository.fuzzySearchTitleAndDescription(query, pagination);
+    return storedVideoSearchRepository.fuzzySearchTitleAndDescription(query, size)
+        .flatMap(x -> getByReferenceId(x.getReferenceId()));
   }
 
 }

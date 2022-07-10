@@ -8,6 +8,7 @@ import in.fampay.videoscraper.repository.es.StoredVideoSearchEntityRepository;
 import in.fampay.videoscraper.repository.sql.StoredVideoDetailsRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -27,7 +28,15 @@ public class StoredVideoDetailsDao {
 
   public final void save(final StoredVideoDetailsEntity entity) {
 
-    storedVideoDetailsRepository.save(entity);
-    videoSearchEntityRepository.save(youtubeSearchMapper.convertVideoDetailsToVideoSearchEntity(entity));
+    try {
+      storedVideoDetailsRepository.save(entity);
+      val searchEntity = youtubeSearchMapper.convertVideoDetailsToVideoSearchEntity(entity);
+      log.info("Search Entity {}", searchEntity);
+      val responseEntity = videoSearchEntityRepository.save(searchEntity);
+      log.info("Search Entity {}", responseEntity);
+    } catch (Exception e) {
+      log.error("Error ", e);
+    }
+
   }
 }

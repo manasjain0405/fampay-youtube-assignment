@@ -1,5 +1,7 @@
 package in.fampay.videofeedinterface.repository.sql;
 
+import java.time.LocalDateTime;
+
 import in.fampay.videofeedinterface.entity.sql.StoredVideoDetailsEntity;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
@@ -12,7 +14,7 @@ public interface StoredVideoDetailsRepository extends ReactiveCrudRepository<Sto
 
   Mono<StoredVideoDetailsEntity> findByReferenceId(final String referenceId);
 
-  Flux<StoredVideoDetailsEntity> findByIdGreaterThan(final long cursorId, final Pageable pageable);
+  Flux<StoredVideoDetailsEntity> findByUpdatedAtLessThan(final LocalDateTime cursor, final Pageable pageable);
 
   Flux<StoredVideoDetailsEntity> findAllBy(final Pageable pageable);
 }
