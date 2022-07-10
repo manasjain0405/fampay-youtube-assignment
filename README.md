@@ -1,7 +1,7 @@
 # fampay-youtube-assignment
 
 ## Problem Statement
-To make an API to fetch latest videos sorted in reverse chronological order of their publishing date-time from YouTube for a given tag/search query in a paginated response.
+To make an API to fetch the latest videos sorted in reverse chronological order of their publishing date-time from YouTube for a given tag/search query in a paginated response.
 ### Goals
 - Server should call the YouTube API continuously in background (async) with some interval (say 10 seconds) for fetching the latest videos for a predefined search query and should store the data of videos (specifically these fields - Video title, description, publishing datetime, thumbnails URLs and any other fields you require) in a database with proper indexes.
 - A GET API which returns the stored video data in a paginated response sorted in descending order of published datetime.
@@ -45,8 +45,30 @@ Run the command given below in the root directory of the project.
 docker compose down
 ```
 
+### Swagger
+Swagger 3 is integrated in the project as an alternative to a dashboard, making it easier to review Dtos and Apis.
+You can also check all the schemas used under the schema tab.
+[Link To Swagger](http://localhost:8010/webjars/swagger-ui/index.html#/) 
+Controller: video-feed-controller
+- Video Feed Api (/feed) In this api cursor pagination is implemented
+  - size : integer parameter, pass the size of entries to be requested in the page
+  - cursor: dateTime parameter, leave it empty to fetch the initial page, in the api response a dto field *pageCursor* will be returned, pass it as it is in the same api to request the next page with the given size.
+- Fuzzy Search Api (/search) 
+  - size : integer parameter, the no of entries to be returned of the search.
+  - query : string parameter, the query string on which fuzzy search is to be performed.
+
 ## Solution Arch.
 The solution contains 2 microservices
 - video-scraper (Responsible for fetching videos of the search parameter specified in .env under key YOUTUBE_SEARCH_QUERY, storing it in mysql and creating search index on elastic search)
 - video-feed-interface (Provide paginated feed and fuzzy search apis over the datastore)
 Project is broken down into 2 microservices, video-feed-interface is completely read based and video-scraper is completely write based, this is to make sure if one microservice is down the other functionality is still up and remains unaffected)
+
+### Service Diagram
+![Service Diagram](VideoFeedApplicationArch.png)
+
+### Further Optimisations
+- In an environment where multiple instances of the same application is deployed, Spring @Scheduled tasks are not a good implementation of cron, there are 2 alternatives for the same
+  - Bind the video fetch and store process behind an API and let a linux cron / Rundeck utility can invoke the API exposed over a loadbalancer so the load is distributed and the invocation is same as the cron defined and not he multiple of the pods deployed.
+  - A workflow utility like temporal can be used to create this cron workflow, it will use the inbuilt scheduler to do the task, this could be an overkill just for cron purpose.
+- In docker-compose config, a custom health check can be implemented for elastic search and a dependency can be configured on the rediness/liveness of the elasticsearch cluster over the java images so its is not started until the es cluster is up and multiple restarts of the services can be avoided.
+- In a distributed environment the stack of api keys can be maintained over redis so if a key expires in one instance and removed from the stack the same is propagated to all the other instances, instead of each pod maintaining their copy of api key stack.
