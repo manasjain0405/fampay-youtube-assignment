@@ -6,7 +6,7 @@ spring:
     url: localhost:9200
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/example_db?useUnicode=true&characterEncoding=utf8&useSSL=false
+    url: jdbc:mysql://localhost:3306/video_details?useUnicode=true&characterEncoding=utf8&useSSL=false
     username: root
     password: login@root
     type: com.zaxxer.hikari.HikariDataSource
