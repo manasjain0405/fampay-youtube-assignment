@@ -17,7 +17,7 @@ services:
     links:
       - zookeeper
     ports:
-      - 29092:29092
+      - "29092:29092"
       - "9092:9092"
     environment:
       KAFKA_BROKER_ID: 1
@@ -57,8 +57,8 @@ services:
       - ./ci/data/es/logs:/usr/share/elasticsearch/logs
       - ./ci/data/es/repo:/usr/share/elasticsearch/repo
     ports:
-      - 9200:9200
-      - 9300:9300
+      - "9200:9200"
+      - "9300:9300"
     expose:
       - "9200"
 
@@ -120,5 +120,3 @@ volumes:
     driver: local
   elasticsearch-data:
     driver: local
-networks:
-  esnet:
