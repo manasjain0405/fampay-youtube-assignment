@@ -33,15 +33,7 @@ services:
     environment:
       - xpack.security.enabled=false
       - discovery.type=single-node
-    healthcheck:
-      test:
-        [
-          "CMD-SHELL",
-          "curl -s --cacert config/certs/ca/ca.crt https://localhost:9200 | grep -q 'missing authentication credentials'",
-        ]
-      interval: 10s
-      timeout: 10s
-      retries: 120
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     ulimits:
       memlock:
         soft: -1
@@ -93,9 +85,9 @@ services:
       - elasticsearch
     environment:
       YOUTUBE_KEY: "${YOUTUBE_KEY}"
-      DB_USERNAME: ${DB_USERNAME}
-      DB_PASS: ${DB_PASS}
-      YOUTUBE_SEARCH_QUERY: ${YOUTUBE_SEARCH_QUERY}
+      DB_USERNAME: "${DB_USERNAME}"
+      DB_PASS: "${DB_PASS}"
+      YOUTUBE_SEARCH_QUERY: "${YOUTUBE_SEARCH_QUERY}"
 
   video-feed-application:
     image: video-feed-application:1.0
@@ -112,11 +104,13 @@ services:
       - kafka
       - elasticsearch
     environment:
-      DB_USERNAME: ${DB_USERNAME}
-      DB_PASS: ${DB_PASS}
+      DB_USERNAME: "${DB_USERNAME}"
+      DB_PASS: "${DB_PASS}"
 
 volumes:
   db:
     driver: local
   elasticsearch-data:
     driver: local
+networks:
+  esnet:
