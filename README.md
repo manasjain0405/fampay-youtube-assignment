@@ -26,8 +26,27 @@ To make an API to fetch latest videos sorted in reverse chronological order of t
 - Maven
 - Docker
 - bash/zsh shell
-### Instructions
-Navigate to root folder of the project and run the following command after insuring the above mentioned prerequisites are already installed on the system.
+### Instructions to start application
+Navigate to root folder of the project and follow the following steps after insuring the above mentioned prerequisites are already installed on the system.
+S1) In the .env file add all the available youtube api keys in a comma separated manned for the variable *YOUTUBE_KEY*
+```
+YOUTUBE_KEY=KEY1,KEY2,KEY3
+```
+S2) *OPTIONAL* Set the desired password for mysql in .env(DB_PASS) and docker-compose.yml under the db service (MYSQL_ROOT_PASSWORD)
+S3) Enter the following command in the root folder of the project. You can monitor the progress on docker desktop dashboard.
 ```bash
 bash start.sh
 ```
+Note: ElasticSearch takes about 2 mins to start (observed on my system with just 8gb ram) till then the java applications might reastart, but as soon as elastic search is up the system stabilizes.
+
+### Instruction to stop application
+Run the command given below in the root directory of the project.
+```bash
+docker compose down
+```
+
+## Solution Arch.
+The solution contains 2 microservices
+- video-scraper (Responsible for fetching videos of the search parameter specified in .env under key YOUTUBE_SEARCH_QUERY, storing it in mysql and creating search index on elastic search)
+- video-feed-interface (Provide paginated feed and fuzzy search apis over the datastore)
+Project is broken down into 2 microservices, video-feed-interface is completely read based and video-scraper is completely write based, this is to make sure if one microservice is down the other functionality is still up and remains unaffected)
