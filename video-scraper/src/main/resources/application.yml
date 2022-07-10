@@ -1,0 +1,80 @@
+server:
+  port: 8020
+
+spring:
+  elasticsearch:
+    url: vs-elasticsearch:9200
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://vs-mysql:3306/video_details?useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false
+    username: ${DB_USERNAME}
+    password: ${DB_PASS}
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      idle-timeout: 60000
+      connection-timeout: 2000
+      maximum-pool-size: 35
+      minimum-idle: 10
+      max-lifetime: 1800000
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+  cloud:
+    function:
+      definition: addVideoEntry
+    stream:
+      bindings:
+        addVideoEntry-in-0:
+          destination: add-video-search-entry
+          binder: kafka
+          contentType: application/json
+          group: youtube-scraper
+        init-video-refresh:
+          destination: add-video-search-entry
+          binder: kafka
+          contentType: application/json
+      kafka:
+        default:
+          producer:
+            configuration:
+              key:
+                serializer: org.apache.kafka.common.serialization.StringSerializer
+        binder:
+          autoCreateTopics: true
+          minPartitionCount: 4
+          replicationFactor: 1
+          brokers: PLAINTEXT://vs-kafka:9092
+          configuration:
+            commit.interval.ms: 1000
+            session.timeout.ms: 20000
+            default:
+              key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+              value.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+
+feign:
+  httpclient:
+    max-connections: 500
+    max-connections-per-route: 40
+    hc5:
+      enabled: false
+      pool-concurrency-policy: lax
+      pool-reuse-policy: fifo
+  circuitbreaker:
+    enabled: false
+  client.config.default:
+    connectTimeout: 5000
+    readTimeout: 8000
+
+youtube:
+  query: ${YOUTUBE_SEARCH_QUERY}
+  api:
+    base-url: https://youtube.googleapis.com/youtube/v3
+    key: ${YOUTUBE_KEY}
+
+springdoc:
+  packages-to-scan: in.fampay.videoscraper.controller
+  api-docs:
+    path: "/v3/api-docs"
+  swagger-ui:
+    disable-swagger-default-url: true
