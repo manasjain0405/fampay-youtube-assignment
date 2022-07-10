@@ -11,6 +11,6 @@ public interface VideoFeedService {
   Mono<PageableResponse<VideoDetailsDto, LocalDateTime>> getVideoFeedPaginated(final int size,
       final LocalDateTime cursor);
 
-  Mono<PageableResponse<VideoDetailsDto, LocalDateTime>> getSearchResultPaginated(final int size);
+  Mono<PageableResponse<VideoDetailsDto, LocalDateTime>> getSearchResultPaginated(final int size, final String query);
 
 }

@@ -31,7 +31,7 @@ public class StoredVideosDao {
       final int size) {
 
     val pagination = PageRequest.of(0, size, Sort.by("videoUploadedAt").descending());
-    return storedVideoDetailsRepository.findByUpdatedAtLessThan(cursor, pagination);
+    return storedVideoDetailsRepository.findByVideoUploadedAtBefore(cursor, pagination);
   }
 
   public final Flux<StoredVideoDetailsEntity> getInitialVideoDetailsPage(final int size) {
@@ -42,7 +42,7 @@ public class StoredVideosDao {
 
   public final Flux<StoredVideoDetailsEntity> getPaginatedSearchResult(final String query, final int size) {
 
-    return storedVideoSearchRepository.fuzzySearchTitleAndDescription(query, size)
+    return storedVideoSearchRepository.fuzzySearchTitleAndDescription(query, PageRequest.of(0, size))
         .flatMap(x -> getByReferenceId(x.getReferenceId()));
   }
 

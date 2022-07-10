@@ -55,7 +55,9 @@ public class VideoFeedServiceImpl implements VideoFeedService {
   }
 
   @Override
-  public Mono<PageableResponse<VideoDetailsDto, LocalDateTime>> getSearchResultPaginated(int size) {
-    return null;
+  public Mono<PageableResponse<VideoDetailsDto, LocalDateTime>> getSearchResultPaginated(final int size,
+      final String query) {
+
+    return createPageResponse(storedVideosDao.getPaginatedSearchResult(query, size));
   }
 }

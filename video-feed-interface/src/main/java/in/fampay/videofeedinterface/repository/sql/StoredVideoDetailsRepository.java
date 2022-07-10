@@ -14,7 +14,7 @@ public interface StoredVideoDetailsRepository extends ReactiveCrudRepository<Sto
 
   Mono<StoredVideoDetailsEntity> findByReferenceId(final String referenceId);
 
-  Flux<StoredVideoDetailsEntity> findByUpdatedAtLessThan(final LocalDateTime cursor, final Pageable pageable);
+  Flux<StoredVideoDetailsEntity> findByVideoUploadedAtBefore(final LocalDateTime cursor, final Pageable pageable);
 
   Flux<StoredVideoDetailsEntity> findAllBy(final Pageable pageable);
 }
