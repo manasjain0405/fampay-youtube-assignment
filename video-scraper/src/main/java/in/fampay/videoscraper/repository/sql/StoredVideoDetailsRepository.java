@@ -1,10 +1,8 @@
-package in.fampay.videoscraper.repository;
+package in.fampay.videoscraper.repository.sql;
 
 import java.util.Optional;
 
-import in.fampay.videoscraper.entity.StoredVideoDetailsEntity;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import in.fampay.videoscraper.entity.sql.StoredVideoDetailsEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -4,7 +4,7 @@ import java.util.function.Consumer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import in.fampay.videoscraper.dao.StoredVideoDetailsDao;
-import in.fampay.videoscraper.entity.StoredVideoDetailsEntity;
+import in.fampay.videoscraper.entity.sql.StoredVideoDetailsEntity;
 import in.fampay.videoscraper.utils.ThrowingConsumer;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +26,6 @@ public class AddVideoEntryConsumer {
 
     return ThrowingConsumer.unchecked((message) -> {
 
-      log.info("Received entity to write: {}", message);
       val entity = objectMapper.readValue(message.getPayload(), StoredVideoDetailsEntity.class);
       if (storedVideoDetailsDao.getByReferenceId(entity.getReferenceId()).isEmpty()) {
         storedVideoDetailsDao.save(entity);

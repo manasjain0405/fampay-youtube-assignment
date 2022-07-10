@@ -1,4 +1,4 @@
-package in.fampay.videofeedinterface.entity.context;
+package in.fampay.videofeedinterface.entity.sql.context;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

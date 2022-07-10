@@ -1,8 +1,9 @@
-package in.fampay.videofeedinterface.entity;
+package in.fampay.videofeedinterface.entity.sql;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-import in.fampay.videofeedinterface.entity.context.VideoMetadataContext;
+import in.fampay.videofeedinterface.entity.sql.constants.StoredVideoDetailsColumns;
+import in.fampay.videofeedinterface.entity.sql.context.VideoMetadataContext;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -17,18 +18,18 @@ import org.springframework.data.relational.core.mapping.Table;
 @Table("stored_video_details_entity")
 public class StoredVideoDetailsEntity extends BaseEntity {
 
-  @Column("ref_id")
+  @Column(StoredVideoDetailsColumns.REF_ID)
   private String referenceId;
 
-  @Column("video_title")
+  @Column(StoredVideoDetailsColumns.VIDEO_TITLE)
   private String videoTitle;
 
-  @Column("video_description")
+  @Column(StoredVideoDetailsColumns.VIDEO_DESCRIPTION)
   private String videoDescription;
 
-  @Column("video_uploaded_at")
-  private LocalDate videoUploadedAt;
+  @Column(StoredVideoDetailsColumns.VIDEO_UPLOADED_AT)
+  private LocalDateTime videoUploadedAt;
 
-  @Column("context")
+  @Column(StoredVideoDetailsColumns.CONTEXT)
   private VideoMetadataContext context;
 }
