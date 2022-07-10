@@ -6,8 +6,8 @@ spring:
     url: vs-elasticsearch:9200
   r2dbc:
     url: r2dbc:mysql://vs-mysql:3306/video_details
-    username: root
-    password: login@root
+    username: ${DB_USERNAME}
+    password: ${DB_PASS}
     initialization-mode: always
     pool:
       initial-size: 10

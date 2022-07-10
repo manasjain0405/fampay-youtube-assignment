@@ -26,6 +26,11 @@ public class YoutubeInputStreamScheduler {
   @Scheduled(fixedRate = 10000)
   public void reportCurrentTime() {
 
-    youtubeVideoFetchService.fetchVideoOnQueryParam(query, YoutubeApiConstants.MAX_RESULT_PARAMETER);
+    try {
+      youtubeVideoFetchService.fetchVideoOnQueryParam(query, YoutubeApiConstants.MAX_RESULT_PARAMETER);
+    } catch (Exception e) {
+      log.error("Exception occurred", e);
+    }
+
   }
 }
